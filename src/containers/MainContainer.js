@@ -4,22 +4,27 @@ import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
 import SimpleCounter from '../components/SimpleCounter'
-import Article from '../components/common/templates/Article'
+import Header from '../components/base/Header'
+import ContentWrapper from '../components/common/templates/ContentWrapper'
+import MainButton from '../components/common/main/MainButton'
 
 import * as appActions from '../redux/modules/app'
 
+const items = [
+  '메뉴 관리',
+  '주문 확인'
+]
+
 const MainContainer = (props) => {
   return (
-    <Article>
-      <h3>Hi, there!</h3>
-      <p></p>
-      <SimpleCounter
-        increment={() => props.appActions.increment(1)}
-        decrement={() => props.appActions.decrement(1)}
-        value={props.value} />
-      <br />
-      <Link to="/about">Want to know about this page?</Link>
-    </Article>
+    <>
+      <Header />
+      <ContentWrapper items={items}>
+        {
+          (item) => <MainButton>{item}</MainButton>
+        }
+      </ContentWrapper>
+    </>
   )
 }
 

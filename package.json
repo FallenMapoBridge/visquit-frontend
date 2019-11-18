@@ -30,6 +30,7 @@
     "webpack-manifest-plugin": "^2.0.4"
   },
   "dependencies": {
+    "@material-ui/core": "^4.6.1",
     "@storybook/addon-actions": "^5.2.6",
     "@storybook/addons": "^5.2.6",
     "react": "^16.11.0",
