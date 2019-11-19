@@ -4,16 +4,21 @@ import Toolbar from '@material-ui/core/Toolbar'
 import TypoGraphy from '@material-ui/core/Typography'
 
 import { makeStyles } from '@material-ui/core/styles'
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
+    zIndex: theme.zIndex.drawer + 1,
     marginBottom: 10
   }
-})
+}))
 
-const Header = (props) => {
+const MainHeader = (props) => {
   const classes = useStyles()
   return (
-    <AppBar className={classes.root} color="primary" position="static">
+    <AppBar
+      className={classes.root}
+      color="primary"
+      position="fixed"
+    >
       <Toolbar>
         <TypoGraphy variant="h4"
           color="inherit"
@@ -25,4 +30,4 @@ const Header = (props) => {
   )
 }
 
-export default Header
+export default MainHeader

@@ -12,7 +12,8 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     '&:hover': {
-      backgroundColor: '#e7e7e7'
+      backgroundColor: '#e7e7e7',
+      cursor: 'pointer'
     }
   },
   typo: {

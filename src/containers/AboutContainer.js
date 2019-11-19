@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
-import Header from '../components/base/Header'
+import PageHeader from '../components/base/header/PageHeader'
 import Article from '../components/common/templates/Article'
 
 const AboutContainer = (props) => {
   return (
     <>
-      <Header />
+      <PageHeader />
       <Article>
         <h3>About this page</h3>
         <p>This page is a bolierplate for React App. If you want to use it, <i>feel free to try out!</i></p>

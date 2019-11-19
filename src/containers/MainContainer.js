@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
 import SimpleCounter from '../components/SimpleCounter'
-import Header from '../components/base/Header'
+import MainHeader from '../components/base/header/MainHeader'
 import ContentWrapper from '../components/common/templates/ContentWrapper'
 import MainButton from '../components/common/main/MainButton'
 
@@ -18,7 +18,7 @@ const items = [
 const MainContainer = (props) => {
   return (
     <>
-      <Header />
+      <MainHeader />
       <ContentWrapper items={items}>
         {
           (item) => <MainButton>{item}</MainButton>

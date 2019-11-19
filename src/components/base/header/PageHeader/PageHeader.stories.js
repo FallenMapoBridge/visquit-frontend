@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
-import Header from './Header'
+import PageHeader from './PageHeader'
 
-storiesOf('Header', module)
+storiesOf('PageHeader', module)
   .add('default', () => {
     return (
-      <Header />
+      <PageHeader />
     )
   })
