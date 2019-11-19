@@ -4,18 +4,18 @@ import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
 import MainHeader from '../components/base/MainHeader'
-import ContentWrapper from '../components/common/templates/ContentWrapper'
-import MainButton from '../components/common/main/MainButton'
+import MainContentWrapper from '../components/common/templates/MainContentWrapper'
+import MainButton from '../components/common/button/MainButton'
 
 import * as appActions from '../redux/modules/app'
 
-import routes from '../utils/routes'
+import routes from '../utils/temp/routes'
 
 const MainContainer = (props) => {
   return (
     <>
       <MainHeader />
-      <ContentWrapper items={routes}>
+      <MainContentWrapper items={routes}>
         {
           (item) => (
             <MainButton
@@ -24,7 +24,7 @@ const MainContainer = (props) => {
             />
           )
         }
-      </ContentWrapper>
+      </MainContentWrapper>
     </>
   )
 }

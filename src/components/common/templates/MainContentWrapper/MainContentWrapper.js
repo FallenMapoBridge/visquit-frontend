@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const ContentWrapper = (props) => {
+const MainContentWrapper = (props) => {
   const classes = useStyles()
   return (
     <Container
@@ -26,4 +26,4 @@ const ContentWrapper = (props) => {
   )
 }
 
-export default ContentWrapper
+export default MainContentWrapper

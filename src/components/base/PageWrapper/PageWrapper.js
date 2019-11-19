@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import TypoGraphy from '@material-ui/core/Typography'
+import Typography from '@material-ui/core/Typography'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 
 import Drawer from '@material-ui/core/Drawer'
@@ -18,7 +18,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 
-import routes from '../../../utils/routes'
+import routes from '../../../utils/temp/routes'
 
 const drawerWidth = 180
 const useStyles = makeStyles(theme => ({
@@ -116,11 +116,11 @@ const PageWrapper = (props) => {
           >
             <MenuIcon />
           </IconButton>
-          <TypoGraphy variant="h4"
+          <Typography variant="h4"
             color="inherit"
           >
             VISQUIT PoS
-         </TypoGraphy>
+         </Typography>
         </Toolbar>
       </AppBar>
       <Drawer
