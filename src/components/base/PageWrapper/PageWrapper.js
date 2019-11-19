@@ -20,7 +20,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 
 import routes from '../../../utils/routes'
 
-const drawerWidth = 240
+const drawerWidth = 180
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
