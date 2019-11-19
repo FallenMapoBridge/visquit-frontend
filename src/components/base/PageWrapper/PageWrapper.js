@@ -1,25 +1,26 @@
 import React, { useState } from 'react'
 import clsx from 'clsx'
+import { withRouter } from 'react-router-dom'
+
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import TypoGraphy from '@material-ui/core/Typography'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import Drawer from '@material-ui/core/Drawer'
+import List from '@material-ui/core/List'
+import Divider from '@material-ui/core/Divider'
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
 
-const drawerWidth = 240;
+import routes from '../../../utils/routes'
 
+const drawerWidth = 240
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
@@ -81,7 +82,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const PageHeader = (props) => {
+const PageWrapper = (props) => {
   const classes = useStyles()
   const theme = useTheme()
   const [open, setOpen] = useState(false)
@@ -143,16 +144,26 @@ const PageHeader = (props) => {
         </div>
         <Divider />
         <List>
-          {['메뉴 확인', '주문 확인'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+          {routes.map((route, index) => (
+            <ListItem
+              onClick={() => props.history.push(route.uri)}
+              key={route.name}
+              button
+            >
+              <ListItemIcon>
+                {route.icon}
+              </ListItemIcon>
+              <ListItemText primary={route.name} />
             </ListItem>
           ))}
         </List>
       </Drawer>
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+          {props.children}
+      </main>
     </div>
   )
 }
 
-export default PageHeader
+export default withRouter(PageWrapper)

@@ -3,25 +3,26 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
-import SimpleCounter from '../components/SimpleCounter'
-import MainHeader from '../components/base/header/MainHeader'
+import MainHeader from '../components/base/MainHeader'
 import ContentWrapper from '../components/common/templates/ContentWrapper'
 import MainButton from '../components/common/main/MainButton'
 
 import * as appActions from '../redux/modules/app'
 
-const items = [
-  '메뉴 관리',
-  '주문 확인'
-]
+import routes from '../utils/routes'
 
 const MainContainer = (props) => {
   return (
     <>
       <MainHeader />
-      <ContentWrapper items={items}>
+      <ContentWrapper items={routes}>
         {
-          (item) => <MainButton>{item}</MainButton>
+          (item) => (
+            <MainButton
+              item={item}
+              key={item.name}
+            />
+          )
         }
       </ContentWrapper>
     </>
