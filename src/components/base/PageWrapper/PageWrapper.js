@@ -85,21 +85,22 @@ const useStyles = makeStyles(theme => ({
 const PageWrapper = (props) => {
   const classes = useStyles()
   const theme = useTheme()
-  const [open, setOpen] = useState(false)
+  const [isDrawerOpen, setDrawerOpen] = useState(false)
+  // const [isDrawerOpen, setDrawerOpen] = useState(false)
 
   const onDrawerOpen = () => {
-    setOpen(true);
+    setDrawerOpen(true);
   };
 
   const onDrawerClose = () => {
-    setOpen(false);
+    setDrawerOpen(false);
   };
 
   return (
     <div className={classes.root}>
       <AppBar
         className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
+          [classes.appBarShift]: isDrawerOpen,
         })}
         color="primary"
         position="fixed"
@@ -107,7 +108,7 @@ const PageWrapper = (props) => {
         <Toolbar>
           <IconButton
             className={clsx(classes.menuButton, {
-              [classes.hide]: open,
+              [classes.hide]: isDrawerOpen,
             })}
             color="inherit"
             aria-label="open drawer"
@@ -126,16 +127,16 @@ const PageWrapper = (props) => {
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
+          [classes.drawerOpen]: isDrawerOpen,
+          [classes.drawerClose]: !isDrawerOpen,
         })}
         classes={{
           paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
+            [classes.drawerOpen]: isDrawerOpen,
+            [classes.drawerClose]: !isDrawerOpen,
           }),
         }}
-        open={open}
+        open={isDrawerOpen}
       >
         <div className={classes.toolbar}>
           <IconButton onClick={onDrawerClose}>

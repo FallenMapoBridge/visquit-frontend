@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton'
 
 import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles(theme => ({
-  contents: {
+  content: {
     height: 250,
     display: 'flex',
     alignItems: 'center',
@@ -40,7 +40,7 @@ const MainButton = (props) => {
       <Card
         onClick={() => props.history.push(props.item.uri)}
       >
-        <CardContent className={classes.contents}>
+        <CardContent className={classes.content}>
           <Grid
             container
             className={classes.buttonContainer}

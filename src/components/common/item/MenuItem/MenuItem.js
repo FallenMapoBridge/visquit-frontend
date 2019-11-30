@@ -6,6 +6,16 @@ import Typography from '@material-ui/core/Typography'
 
 import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles(theme => ({
+  content: {
+    height: '8rem',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    '&:hover': {
+      backgroundColor: '#e7e7e7',
+      cursor: 'pointer',
+    },
+  },
   buttonContainer: {
     alignItems: 'center',
   },
@@ -16,10 +26,11 @@ import menu from '../../../../utils/temp/menu'
 const MenuItem = (props) => {
   const classes = useStyles()
   return (
-    <Grid item xs={6} sm={4}>
+    <Grid item xs={6} sm={4} md={3}>
       <Card
       >
         <CardContent
+          className={classes.content}
         >
           <Grid
             container
