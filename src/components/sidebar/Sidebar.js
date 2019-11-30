@@ -214,7 +214,7 @@ const Sidebar = (props) => {
               <ListItem
                 button
                 className={classes.nested}
-                onClick={() => props.history.push('/orders')}
+                onClick={() => props.history.push('/orders/pending')}
               >
                 <ListItemText primary="현재 주문 목록" />
               </ListItem>

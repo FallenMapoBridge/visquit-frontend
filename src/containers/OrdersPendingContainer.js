@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import PageWrapper from '../components/base/PageWrapper'
 import Article from '../components/common/templates/Article'
 
-const OrdersContainer = (props) => {
+const OrdersPendingContainer = (props) => {
   return (
     <>
       <PageWrapper>
@@ -20,4 +20,4 @@ const OrdersContainer = (props) => {
   )
 }
 
-export default OrdersContainer
+export default OrdersPendingContainer

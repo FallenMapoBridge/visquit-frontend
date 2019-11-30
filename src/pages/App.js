@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 import {
   Home,
   Menu,
-  Orders
+  OrdersPending
 } from '../pages'
 
 // catalog for all routings
@@ -14,7 +14,7 @@ const App = (props) => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/menu" component={Menu} />
-        <Route exact path="/orders" component={Orders} />
+        <Route exact path="/orders/pending" component={OrdersPending} />
       </Switch>
     </div>
   )

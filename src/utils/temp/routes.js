@@ -10,7 +10,7 @@ const routes = [
   },
   {
     name: '주문 확인',
-    uri: '/orders',
+    uri: '/orders/pending',
     icon: <ReceiptIcon />,
   }
 ]
