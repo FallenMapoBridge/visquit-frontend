@@ -9,6 +9,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles'
 
 import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'
+import Collapse from '@material-ui/core/Collapse'
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
@@ -17,6 +18,11 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
+
+import ReceiptIcon from '@material-ui/icons/Receipt'
+import MenuBookIcon from '@material-ui/icons/MenuBook'
+import ExpandLess from '@material-ui/icons/ExpandLess'
+import ExpandMore from '@material-ui/icons/ExpandMore'
 
 import routes from '../../../utils/temp/routes'
 
@@ -80,21 +86,35 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+
+  nested: {
+    paddingLeft: theme.spacing(4),
+  },
 }))
 
 const PageWrapper = (props) => {
   const classes = useStyles()
   const theme = useTheme()
   const [isDrawerOpen, setDrawerOpen] = useState(false)
-  // const [isDrawerOpen, setDrawerOpen] = useState(false)
+  const [isOrdersOpen, setOrdersOpen] = useState(false)
 
   const onDrawerOpen = () => {
     setDrawerOpen(true);
   };
 
   const onDrawerClose = () => {
+    if (isOrdersOpen === true) {
+      setOrdersOpen(false)
+    }
     setDrawerOpen(false);
   };
+
+  const onOrdersExpand = () => {
+    if (isDrawerOpen === false) {
+      setDrawerOpen(true)
+    }
+    setOrdersOpen(!isOrdersOpen)
+  }
 
   return (
     <div className={classes.root}>
@@ -145,18 +165,43 @@ const PageWrapper = (props) => {
         </div>
         <Divider />
         <List>
-          {routes.map((route, index) => (
-            <ListItem
-              onClick={() => props.history.push(route.uri)}
-              key={route.name}
-              button
-            >
-              <ListItemIcon>
-                {route.icon}
-              </ListItemIcon>
-              <ListItemText primary={route.name} />
-            </ListItem>
-          ))}
+          <ListItem
+            onClick={() => props.history.push('/menu')}
+            button
+          >
+            <ListItemIcon>
+              <MenuBookIcon />
+            </ListItemIcon>
+            <ListItemText primary='메뉴 관리' />
+          </ListItem>
+          <ListItem
+            onClick={onOrdersExpand}
+            button
+          >
+            <ListItemIcon>
+              <ReceiptIcon />
+            </ListItemIcon>
+            <ListItemText primary='주문 확인' />
+            {isOrdersOpen ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+          <Collapse in={isOrdersOpen} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItem
+                button
+                className={classes.nested}
+                onClick={() => props.history.push('/orders')}
+              >
+                <ListItemText primary="주문 목록" />
+              </ListItem>
+              <ListItem
+                button
+                className={classes.nested}
+                onClick={() => props.history.push('/orders')}
+              >
+                <ListItemText primary="처리 완료 주문" />
+              </ListItem>
+            </List>
+          </Collapse>
         </List>
       </Drawer>
       <main className={classes.content}>
