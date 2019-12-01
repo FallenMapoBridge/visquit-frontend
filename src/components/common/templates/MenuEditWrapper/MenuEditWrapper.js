@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import Container from '@material-ui/core/Container'
 
-const MenuDetailWrapper = (props) => {
+const MenuEditWrapper = (props) => {
   return (
     <Container
       maxWidth={'sm'}
@@ -13,4 +13,4 @@ const MenuDetailWrapper = (props) => {
   )
 }
 
-export default MenuDetailWrapper
+export default MenuEditWrapper

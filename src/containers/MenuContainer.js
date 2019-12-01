@@ -9,6 +9,14 @@ import MenuItem from '../components/common/item/MenuItem'
 
 import menu from '../utils/temp/menu'
 
+// # TODOS
+// - API 사용하여 메뉴 전체 가져오기
+// - 각 메뉴 아이템에 대하여 메뉴 ID 전달하기
+//   - 메뉴 Update / Delete에 활용
+// - 각 메뉴 클릭시 props.history.push('/')
+//   - 수정 화면으로
+//   - 이떄, 쿼리스트링으로 menuId 전달
+
 const MenuContainer = (props) => {
   return (
     <>
