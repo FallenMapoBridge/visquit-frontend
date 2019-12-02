@@ -43,29 +43,36 @@ const MenuEditContent = (props) => {
         variant="h3"
         className={classes.title}
       >
-        새로운 메뉴 등록
+        {// 메뉴 신규 추가시
+        (location.pathname === '/menu/edit/new')
+        ? (`새로운 메뉴 등록`)
+          // 기존 메뉴 수정시
+        : (match.params.menuId)
+          ? (`메뉴 수정`)
+          : (``)
+        }
       </Typography>
       <TextField
-        id={props.menuId}
+        id="menuName"
         label="메뉴 이름"
         type="search"
         className={classes.textField}
         margin="normal"
         variant="outlined"
         autoComplete="off"
-        // value={}
-        // onChange={}
+        value={props.menuName}
+        onChange={props.handleChange('menuName')}
       />
       <TextField
-        id={props.menuId}
+        id="menuPrice"
         label="가격"
         type="search"
         className={classes.textField}
         margin="normal"
         variant="outlined"
         autoComplete="off"
-        // value={}
-        // onChange={}
+        value={props.menuPrice}
+        onChange={props.handleChange('menuPrice')}
       />
       {
         // 메뉴 신규 추가시

@@ -4,3 +4,4 @@ import withSplitting from '../utils/withSplitting'
 export const Home = withSplitting(() => import('./Home'))
 export const Menu = withSplitting(() => import('./Menu'))
 export const OrdersPending = withSplitting(() => import('./OrdersPending'))
+export const MenuEdit = withSplitting(() => import('./MenuEdit'))

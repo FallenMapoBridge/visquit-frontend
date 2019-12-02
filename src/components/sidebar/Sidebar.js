@@ -193,7 +193,7 @@ const Sidebar = (props) => {
               <ListItem
                 button
                 className={classes.nested}
-                onClick={() => props.history.push('/menu')}
+                onClick={() => props.history.push('/menu/edit/new')}
               >
                 <ListItemText primary="새 메뉴 등록" />
               </ListItem>
@@ -221,7 +221,7 @@ const Sidebar = (props) => {
               <ListItem
                 button
                 className={classes.nested}
-                onClick={() => props.history.push('/orders')}
+                onClick={() => props.history.push('/orders/history')}
               >
                 <ListItemText primary="처리 완료 주문" />
               </ListItem>
