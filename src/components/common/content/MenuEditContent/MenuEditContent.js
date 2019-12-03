@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 
+import PageTitle from '../../typography/PageTitle'
 import AddButtonSet from '../../button/AddButtonSet'
 import EditButtonSet from '../../button/EditButtonSet'
 
@@ -39,10 +40,7 @@ const MenuEditContent = (props) => {
   const { match, location, history } = props
   return (
     <Paper className={classes.root}>
-      <Typography
-        variant="h3"
-        className={classes.title}
-      >
+      <PageTitle>
         {// 메뉴 신규 추가시
         (location.pathname === '/menu/edit/new')
         ? (`새로운 메뉴 등록`)
@@ -51,7 +49,7 @@ const MenuEditContent = (props) => {
           ? (`메뉴 수정`)
           : (``)
         }
-      </Typography>
+      </PageTitle>
       <TextField
         id="menuName"
         label="메뉴 이름"
