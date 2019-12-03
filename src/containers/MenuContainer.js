@@ -15,7 +15,7 @@ import menu from '../utils/temp/menu'
 //   - 메뉴 Update / Delete에 활용
 // - 각 메뉴 클릭시 props.history.push('/')
 //   - 수정 화면으로
-//   - 이떄, 쿼리스트링으로 menuId 전달
+//   - 이때, props.history.push(/menu/edit/:menuId)로 개별 menuId 전달
 
 const MenuContainer = (props) => {
   return (

@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles(theme => ({
   content: {
-    height: '8rem',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -17,11 +16,11 @@ const useStyles = makeStyles(theme => ({
     },
   },
   buttonContainer: {
-    alignItems: 'center',
+    alignItems: 'left',
   },
 }))
 
-const MenuItem = (props) => {
+const OrderItem = (props) => {
   const classes = useStyles()
   return (
     <Grid item xs={6} sm={4} md={3}>
@@ -34,22 +33,34 @@ const MenuItem = (props) => {
             container
             className={classes.buttonContainer}
             direction="column"
-            spacing={1}
+            spacing={0}
           >
-            <Grid item>
-              <Typography
-                variant="h5"
-              >
-                {props.item.name}
-              </Typography>
-            </Grid>
             <Grid item>
               <Typography
                 variant="subtitle1"
               >
-                {props.item.price}원
+                {props.item.order_date} {props.item.order_time}
               </Typography>
             </Grid>
+            {props.item.order_items.map((order_item, index) => (
+              <Grid
+                key={index}
+                item
+              >
+                <Typography
+                  variant="subtitle1"
+                >
+                  {order_item.menu_name} {order_item.item_quantity}
+                </Typography>
+              </Grid>
+            ))}
+            <Grid item>
+                <Typography
+                  variant="h5"
+                >
+                  {props.item.order_price}원
+                </Typography>
+              </Grid>
           </Grid>
         </CardContent>
       </Card>
@@ -57,4 +68,4 @@ const MenuItem = (props) => {
   )
 }
 
-export default MenuItem
+export default OrderItem

@@ -4,17 +4,26 @@ import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
 import PageWrapper from '../components/base/PageWrapper'
-import Article from '../components/common/templates/Article'
+import PageListWrapper from '../components/common/templates/PageListWrapper'
+import OrderItem from '../components/common/item/OrderItem'
+
+import orders from '../utils/temp/orders'
 
 const OrdersPendingContainer = (props) => {
   return (
     <>
       <PageWrapper>
-        <Article>
-          <h3>주문 확인</h3>
-          <p>This page is a bolierplate for React App. If you want to use it, <i>feel free to try out!</i></p>
-          <Link to="/">Go back to home</Link>
-        </Article>
+        <h3>현재 주문 목록</h3>
+        <PageListWrapper items={orders}>
+        {
+          (item) => (
+            <OrderItem
+              item={item}
+              key={item.order_num}
+            />
+          )
+        }
+        </PageListWrapper>
       </PageWrapper>
     </>
   )
