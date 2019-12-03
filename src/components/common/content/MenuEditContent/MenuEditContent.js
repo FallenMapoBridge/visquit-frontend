@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
 
 const MenuEditContent = (props) => {
   const classes = useStyles()
-  const { match, location } = props
+  const { match, location, history } = props
   return (
     <Paper className={classes.root}>
       <Typography
@@ -80,7 +80,7 @@ const MenuEditContent = (props) => {
         ? (
             <AddButtonSet
               onClickCreate={() => alert('create button!')}
-              onClickCancel={() => alert('cancel button!')}
+              onClickCancel={() => history.push('/menu')}
             />
           )
           // 기존 메뉴 수정시
@@ -89,7 +89,7 @@ const MenuEditContent = (props) => {
             <EditButtonSet
               onClickUpdate={() => alert('update button!')}
               onClickDelete={() => alert('delete button!')}
-              onClickCancel={() => alert('cancel button!')}
+              onClickCancel={() => history.push('/menu')}
             />
           )
           : (<></>)
