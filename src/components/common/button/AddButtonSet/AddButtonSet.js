@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Button from '@material-ui/core/Button'
-import Modal from '@material-ui/core/Modal'
+import Modal from '../../Modal'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,42 +19,11 @@ const useStyles = makeStyles(theme => ({
   },
   cancel: {
 
-  },
-  modalPaper: {
-    position: 'absolute',
-    width: 400,
-    backgroundColor: '#ffffff',
-    border: '1px solid rgba(0, 0, 0, 0.23)',
-    borderRadius: '5px',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2,4,3),
-    outline: 0,
-
-    '& h2': {
-      fontWeight: 300,
-    },
-
-    '& button': {
-      marginRight: '3px',
-      marginLeft: '3px',
-    }
-  },
+  }
 }))
-
-const getModalStyle = () => {
-  const top = 50
-  const left = 50
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
 
 const AddButtonSet = (props) => {
   const classes = useStyles()
-  const [modalStyle] = useState(getModalStyle)
   const [modalOpen, setModalOpen] = useState(false)
 
   const handleModalOpen = () => {
@@ -74,12 +43,10 @@ const AddButtonSet = (props) => {
         추가
       </Button>
       <Modal
-        aria-labelledby="simple-modal-title"
-        open={modalOpen}
+        modalOpen={modalOpen}
+        title="이대로 추가하시겠어요?"
       >
-        <div style={modalStyle} className={classes.modalPaper}>
-          <h2>이대로 추가하시겠어요?</h2>
-          <Button
+        <Button
             variant="outlined"
             className={classes.create}
             onClick={props.onClickCreate}
@@ -93,7 +60,6 @@ const AddButtonSet = (props) => {
           >
             아니오
           </Button>
-        </div>
       </Modal>
       <Button
         variant="outlined"
