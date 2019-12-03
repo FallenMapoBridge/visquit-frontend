@@ -69,7 +69,6 @@ const AddButtonSet = (props) => {
       <Button
         variant="outlined"
         className={classes.create}
-        // onClick={props.onClickCreate}
         onClick={handleModalOpen}
       >
         추가
@@ -83,7 +82,7 @@ const AddButtonSet = (props) => {
           <Button
             variant="outlined"
             className={classes.create}
-            onClick={() => alert('confirm!')}
+            onClick={props.onClickCreate}
           >
             예
           </Button>
