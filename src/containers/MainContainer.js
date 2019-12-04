@@ -3,23 +3,29 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
-import SimpleCounter from '../components/SimpleCounter'
-import Article from '../components/common/templates/Article'
+import MainHeader from '../components/base/MainHeader'
+import MainContentWrapper from '../components/common/templates/MainContentWrapper'
+import MainButton from '../components/common/button/MainButton'
 
 import * as appActions from '../redux/modules/app'
 
+import routes from '../utils/temp/routes'
+
 const MainContainer = (props) => {
   return (
-    <Article>
-      <h3>Hi, there!</h3>
-      <p></p>
-      <SimpleCounter
-        increment={() => props.appActions.increment(1)}
-        decrement={() => props.appActions.decrement(1)}
-        value={props.value} />
-      <br />
-      <Link to="/about">Want to know about this page?</Link>
-    </Article>
+    <>
+      <MainHeader />
+      <MainContentWrapper items={routes}>
+        {
+          (item) => (
+            <MainButton
+              item={item}
+              key={item.name}
+            />
+          )
+        }
+      </MainContentWrapper>
+    </>
   )
 }
 
