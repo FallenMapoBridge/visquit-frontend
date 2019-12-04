@@ -26,6 +26,7 @@ const MenuItem = (props) => {
   return (
     <Grid item xs={6} sm={4} md={3}>
       <Card
+        onClick={props.handleClick}
       >
         <CardContent
           className={classes.content}
