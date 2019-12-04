@@ -5,7 +5,8 @@ import {
   Home,
   Menu,
   OrdersPending,
-  MenuEdit
+  OrdersHistory,
+  MenuEdit,
 } from '../pages'
 
 // catalog for all routings
@@ -18,7 +19,7 @@ const App = (props) => {
         <Route exact path="/menu/edit/new" component={MenuEdit} />
         <Route exact path="/menu/edit/:menuId" component={MenuEdit} />
         <Route exact path="/orders/pending" component={OrdersPending} />
-        {/* <Route exact path="/orders/history" component={OrdersHistory} /> */}
+        <Route exact path="/orders/history" component={OrdersHistory} />
       </Switch>
     </div>
   )
