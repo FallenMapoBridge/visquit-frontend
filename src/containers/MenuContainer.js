@@ -1,7 +1,7 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Link } from 'react-router-dom'
 
 import PageWrapper from '../components/base/PageWrapper'
 import PageListWrapper from '../components/common/templates/PageListWrapper'
@@ -14,9 +14,6 @@ import menu from '../utils/temp/menu'
 // - API 사용하여 메뉴 전체 가져오기
 // - 각 메뉴 아이템에 대하여 메뉴 ID 전달하기
 //   - 메뉴 Update / Delete에 활용
-// - 각 메뉴 클릭시 props.history.push('/')
-//   - 수정 화면으로
-//   - 이때, props.history.push(/menu/edit/:menuId)로 개별 menuId 전달
 
 const MenuContainer = (props) => {
   return (
@@ -29,6 +26,7 @@ const MenuContainer = (props) => {
             <MenuItem
               item={item}
               key={item.name}
+              handleClick={() => props.history.push(`/menu/edit/${item.id}`)}
             />
           )
         }
@@ -38,4 +36,4 @@ const MenuContainer = (props) => {
   )
 }
 
-export default MenuContainer
+export default withRouter(MenuContainer)

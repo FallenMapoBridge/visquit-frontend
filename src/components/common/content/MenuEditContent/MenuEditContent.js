@@ -28,11 +28,7 @@ const useStyles = makeStyles(theme => ({
 
 // # TODOS
 // - 각 버튼에 대한 이벤트 함수 연결해주기
-// - 현재 URI 기준으로 버튼 다르게 출력
-//   - URI에 '/new'가 있으면, 추가 버튼셋
-//     - location.pathname === '/menu/edit/new'
-//   - URI에 '/:menuId'가 있으면, 수정 버튼셋
-//     - match.params.menuId
+// - 수정하는 경우, menuId를 사용하여 수정 전 기존의 메뉴 정보 출력
 // - API 체크해서 존재하지 않는 menuId이면 404
 
 const MenuEditContent = (props) => {
