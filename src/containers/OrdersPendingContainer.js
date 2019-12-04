@@ -21,6 +21,7 @@ const OrdersPendingContainer = (props) => {
             <OrderItem
               item={item}
               key={item.order_num}
+              onClickConfirm={() => alert('cooking done!')}
             />
           )
         }
