@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Link } from 'react-router-dom'
 
 import * as actions from '../redux/modules/menu'
 
@@ -25,6 +24,7 @@ const MenuEditContainer = (props) => {
       key: name,
       value: event.target.value
     })
+    props.actions.generateMenuList(event.target.value)
   }
 
   return (
@@ -47,6 +47,8 @@ const mapStateToProps = ({ menu }) => ({
   menuId: menu.menuId,
   menuName: menu.menuName,
   menuPrice: menu.menuPrice,
+  menuNameList: menu.menuNameList,
+  menuNameListChosen: menu.menuNameListChosen,
 })
 
 const mapDispatchToProps = (dispatch) => ({
