@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Link } from 'react-router-dom'
 
 import * as actions from '../redux/modules/menu'
 
@@ -15,16 +14,20 @@ import MenuEditContent from '../components/common/content/MenuEditContent'
 //   - 수정: 기존 메뉴 수정
 //   - 삭제: 기존 메뉴 삭제
 //   - 취소: 이전 화면으로 돌아가기
-//   - 각 버튼은 모달 띄어주면서 재확인
 // - 초기 로드시 menuId는 스토어에 저장
 
 const MenuEditContainer = (props) => {
-  const handleChange = name => event => {
+  const handleInputChange = name => event => {
     // 각 입력 폼에 대한 입력값을 Redux Store에 반영
     props.actions.changeInput({
       key: name,
       value: event.target.value
     })
+    props.actions.generateMenuList(event.target.value)
+  }
+
+  const handleMenuNameCheckbox = index => event => {
+    props.actions.checkMenuNameList(index)
   }
 
   return (
@@ -35,7 +38,9 @@ const MenuEditContainer = (props) => {
             menuId={11} // 테스트용 props
             menuName={props.menuName}
             menuPrice={props.menuPrice}
-            handleChange={handleChange}
+            menuNameList={props.menuNameList}
+            handleInputChange={handleInputChange}
+            handleMenuNameCheckbox={handleMenuNameCheckbox}
           />
         </MenuEditWrapper>
       </PageWrapper>
@@ -47,6 +52,8 @@ const mapStateToProps = ({ menu }) => ({
   menuId: menu.menuId,
   menuName: menu.menuName,
   menuPrice: menu.menuPrice,
+  menuNameList: menu.menuNameList,
+  menuNameListChosen: menu.menuNameListChosen,
 })
 
 const mapDispatchToProps = (dispatch) => ({
