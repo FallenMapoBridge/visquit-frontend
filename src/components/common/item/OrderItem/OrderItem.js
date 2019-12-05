@@ -49,7 +49,7 @@ const OrderItem = (props) => {
       className={classes.root}
     >
       <Card
-        onClick={(props.onClickConfirm) ? handleModalOpen : ''}
+        onClick={(props.onClickConfirm) ? handleModalOpen : () => {} }
       >
         <CardContent
           className={classes.content}
