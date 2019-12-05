@@ -5,6 +5,10 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 
+import FormGroup from '@material-ui/core/FormGroup'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Checkbox from '@material-ui/core/Checkbox'
+
 import PageTitle from '../../typography/PageTitle'
 import AddButtonSet from '../../button/AddButtonSet'
 import EditButtonSet from '../../button/EditButtonSet'
@@ -55,7 +59,7 @@ const MenuEditContent = (props) => {
         variant="outlined"
         autoComplete="off"
         value={props.menuName}
-        onChange={props.handleChange('menuName')}
+        onChange={props.handleInputChange('menuName')}
       />
       <TextField
         id="menuPrice"
@@ -66,8 +70,29 @@ const MenuEditContent = (props) => {
         variant="outlined"
         autoComplete="off"
         value={props.menuPrice}
-        onChange={props.handleChange('menuPrice')}
+        onChange={props.handleInputChange('menuPrice')}
       />
+      {
+        (props.menuNameList.length > 0) && (
+          <FormGroup>
+          {
+            props.menuNameList.map((item, index) => (
+              <FormControlLabel
+                key={index}
+                control={
+                  <Checkbox
+                    checked={item.checked}
+                    value={index}
+                    onChange={props.handleMenuNameCheckbox(index)}
+                  />
+                }
+                label={item.name}
+              />
+            ))
+          }
+          </FormGroup>
+        )  
+      }
       {
         // 메뉴 신규 추가시
         (location.pathname === '/menu/edit/new')

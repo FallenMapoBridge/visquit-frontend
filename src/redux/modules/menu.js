@@ -10,20 +10,45 @@ const READ_MENU = 'menu/READ_MENU'
 const UPDATE_MENU = 'menu/UPDATE_MENU'
 const DELETE_MENU = 'menu/DELETE_MENU'
 
-const GENERATE_MENU_LIST = 'menu/GENERATE_MENU_LIST' // 메뉴 리스트 생성
 const UPDATE_MENU_NAME_LIST = 'menu/UPDATE_MENU_LIST' // UI 출력할 리스트값 갱신
-const CHOOSE_MENU_NAME = 'menu/CHOOSE_MENU_NAME' // 메뉴 추천 선택
+const ON_CHECK_MENU_NAME_LIST = 'menu/ON_ON_CHECK_MENU_NAME_LIST' // 메뉴 이름 추천값 중 체크박스 선택
 
 // action generator functions
 // names will be re-used with `bindActionCreators`
 export const changeInput = createAction(CHANGE_INPUT, payload => ({ key: payload.key, value: payload.value }))
 
 export const generateMenuList = (menuName) => (dispatch) => {
-  const menuLettersArray = menuName.split(' ')
-  const menuList = permute(menuLettersArray)
-  dispatch(updateMenuNameList({ menuNameList: menuList }))
+  // if the input value is empty, make menuNameList empty as well
+  if (menuName === '') {
+    return dispatch(updateMenuNameList({ menuNameList: [] }))
+  }
+
+  const menuLettersArray = menuName.trim().split(' ')
+  const menuNameList = permute(menuLettersArray)
+  // checked flag for use of checkbox
+  const menuNameListWithStatus = menuNameList.map((menuName) => {
+    const menuNameWithStatus = {
+      name: menuName,
+      checked: false,
+    }
+    return menuNameWithStatus
+  })
+  dispatch(updateMenuNameList({ menuNameList: menuNameListWithStatus }))
 }
 const updateMenuNameList = createAction(UPDATE_MENU_NAME_LIST, payload => ({ menuNameList: payload.menuNameList }))
+
+export const checkMenuNameList = (index) => (dispatch, getState) => {
+  const { menu: { menuNameList } } = getState()
+  const previousStatus = menuNameList[index].checked
+  menuNameList[index].checked = !previousStatus
+  dispatch(onCheckMenuNameList({ updatedMenuNameList: menuNameList }))
+  console.log('####')
+  console.log(menuNameList[index].name)
+  console.log(menuNameList[index].checked)
+  console.log('####')
+}
+const onCheckMenuNameList = createAction(ON_CHECK_MENU_NAME_LIST, payload => ({ updatedMenuNameList: payload.updatedMenuNameList }))
+
 
 // default state for this slice state
 const initialState = {
@@ -34,6 +59,7 @@ const initialState = {
   menuNameListChosen: [],
 }
 
+
 // reducer for this slice state
 export default handleActions({
   [CHANGE_INPUT]: (state, action) => ({
@@ -43,5 +69,9 @@ export default handleActions({
   [UPDATE_MENU_NAME_LIST]: (state, action) => ({
     ...state,
     menuNameList: action.payload.menuNameList,
+  }),
+  [ON_CHECK_MENU_NAME_LIST]: (state, action) => ({
+    ...state,
+    menuNameList: action.payload.updatedMenuNameList
   })
 }, initialState)
