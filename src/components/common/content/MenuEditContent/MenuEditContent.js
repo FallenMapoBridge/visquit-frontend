@@ -1,5 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
+import clsx from 'clsx'
 
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
@@ -18,9 +19,14 @@ const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3, 2)
   },
-  title: {
+  permute: {
+    fontWeight: 300,
+    marginTop: '1.3rem',
+    marginBottom: '0.8rem',
+  },
+  permuteMessage: {
     fontWeight: 200,
-    marginBottom: '1.5rem'
+    marginBotton: '0.8rem',
   },
   textField: {
     marginLeft: theme.spacing(0.5),
@@ -72,28 +78,44 @@ const MenuEditContent = (props) => {
         value={props.menuPrice}
         onChange={props.handleInputChange('menuPrice')}
       />
+      <Typography
+        variant="h5"
+        className={classes.permute}
+      >
+        AI 학습 데이터 선택
+      </Typography>
       {
-        (props.menuNameList.length > 0) && (
-          <FormGroup>
-          {
-            props.menuNameList.map((item, index) => {
-              console.log(item.checked)
-              return (
-              <FormControlLabel
-                key={index}
-                control={
-                  <Checkbox
-                    checked={item.checked}
-                    value={index}
-                    onChange={props.handleMenuNameCheckbox(index)}
-                  />
-                }
-                label={item.name}
-              />
-            )})
-          }
-          </FormGroup>
-        )  
+        (props.menuNameList.length > 0)
+        ? (
+            <FormGroup>
+            {
+              props.menuNameList.map((item, index) => {
+                console.log(item.checked)
+                return (
+                <FormControlLabel
+                  key={index}
+                  control={
+                    <Checkbox
+                      checked={item.checked}
+                      value={index}
+                      onChange={props.handleMenuNameCheckbox(index)}
+                      style={{ color: '#4051B6'}}
+                    />
+                  }
+                  label={item.name}
+                />
+              )})
+            }
+            </FormGroup>
+          )
+        : (
+          <Typography
+            variant="body1"
+            className={classes.permuteMessage}
+          >
+            메뉴 이름을 입력해주셔야 합니다.
+          </Typography>
+        )
       }
       {
         // 메뉴 신규 추가시
