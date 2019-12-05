@@ -76,7 +76,9 @@ const MenuEditContent = (props) => {
         (props.menuNameList.length > 0) && (
           <FormGroup>
           {
-            props.menuNameList.map((item, index) => (
+            props.menuNameList.map((item, index) => {
+              console.log(item.checked)
+              return (
               <FormControlLabel
                 key={index}
                 control={
@@ -88,7 +90,7 @@ const MenuEditContent = (props) => {
                 }
                 label={item.name}
               />
-            ))
+            )})
           }
           </FormGroup>
         )  

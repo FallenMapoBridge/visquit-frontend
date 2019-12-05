@@ -37,18 +37,29 @@ export const generateMenuList = (menuName) => (dispatch) => {
 }
 const updateMenuNameList = createAction(UPDATE_MENU_NAME_LIST, payload => ({ menuNameList: payload.menuNameList }))
 
-export const checkMenuNameList = (index) => (dispatch, getState) => {
+export const checkMenuNameList = (idx) => (dispatch, getState) => {
   const { menu: { menuNameList } } = getState()
-  const previousStatus = menuNameList[index].checked
-  menuNameList[index].checked = !previousStatus
-  dispatch(onCheckMenuNameList({ updatedMenuNameList: menuNameList }))
-  console.log('####')
-  console.log(menuNameList[index].name)
-  console.log(menuNameList[index].checked)
-  console.log('####')
+
+  // deep copy
+  const newMenuNameList = menuNameList.map((item, index) => {
+    if (index !== idx) {
+      const newMenu = {
+        name: item.name,
+        checked: item.checked
+      }
+      return newMenu
+    } else {
+      const newMenu = {
+        name: item.name,
+        checked: !item.checked
+      }
+      return newMenu
+    }
+  })
+
+  dispatch(onCheckMenuNameList({ updatedMenuNameList: newMenuNameList }))
 }
 const onCheckMenuNameList = createAction(ON_CHECK_MENU_NAME_LIST, payload => ({ updatedMenuNameList: payload.updatedMenuNameList }))
-
 
 // default state for this slice state
 const initialState = {
