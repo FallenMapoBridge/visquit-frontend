@@ -23,6 +23,7 @@ const MenuEditContainer = (props) => {
       key: name,
       value: event.target.value
     })
+    if (name === 'menuName')
     props.actions.generateMenuList(event.target.value)
   }
 
