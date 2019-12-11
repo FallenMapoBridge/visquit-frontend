@@ -10,19 +10,12 @@ import PageListWrapper from '../components/common/templates/PageListWrapper'
 import PageTitle from '../components/common/typography/PageTitle'
 import MenuItem from '../components/common/item/MenuItem'
 
-
-
-import menu from '../utils/temp/menu'
-
-// # TODOS
-// - API 사용하여 메뉴 전체 가져오기
-// - 각 메뉴 아이템에 대하여 메뉴 ID 전달하기
-//   - 메뉴 Update / Delete에 활용
-
 const MenuContainer = (props) => {
+  // 현재 가게에서 사용하는 메뉴 목록 가져오기
   useEffect(() => {
-    props.appActions.getMenuList(1)
+    props.appActions.getMenuList(props.storeId)
   }, [])
+
   return (
     <>
       <PageWrapper>
@@ -44,7 +37,8 @@ const MenuContainer = (props) => {
 }
 
 const mapStateToProps = ({ app }) => ({
-  menuList: app.menuList
+  menuList: app.menuList,
+  storeId: app.storeId,
 })
 
 const mapDispatchToProps = (dispatch) => ({
