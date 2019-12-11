@@ -78,7 +78,7 @@ const OrderItem = (props) => {
               <Typography
                 variant="subtitle1"
               >
-                주문 메뉴: {props.menuName} {props.item.order_quantity}개
+                {props.menuName} {props.item.order_quantity}개
               </Typography>
             </Grid>
             <Grid item>

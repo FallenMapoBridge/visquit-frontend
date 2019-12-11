@@ -37,12 +37,14 @@ const OrdersPendingContainer = (props) => {
             })[0]
             const menuName = menu.menu_name
 
-            return (<OrderItem
-              menuName={menuName}
-              item={item}
-              key={item.order_id}
-              onClickConfirm={() => alert('cooking done!')}
-            />)
+            return (
+              <OrderItem
+                menuName={menuName}
+                item={item}
+                key={item.order_id}
+                onClickConfirm={() => props.appActions.completeOrder(props.storeId, item.order_id)}
+              />
+            )
           }
         }
         </PageListWrapper>

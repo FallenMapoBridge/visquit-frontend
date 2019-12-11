@@ -35,6 +35,16 @@ export const getOrderHistoryList = (store_id) => (dispatch) => {
 }
 const updateOrderHistoryList = createAction(UPDATE_ORDER_HISTORY_LIST, payload => ({ orderHistoryList: payload.orderHistoryList }))
 
+export const completeOrder = (store_id, order_id) => (dispatch) => {
+  axios.patch(`http://visquit.ga/store/${store_id}/orders/${order_id}`)
+    .then(({ data: { results } }) => {
+      if (results[0][0] === 1) {
+        // 주문 완료 처리 성공, 목록 갱신
+        dispatch(getOrderPendingList(store_id))
+      }
+    })
+}
+
 // default state for this slice state
 const initialState = {
   storeId: 1,
