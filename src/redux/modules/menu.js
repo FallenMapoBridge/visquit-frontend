@@ -1,4 +1,5 @@
 import { createAction, handleActions } from 'redux-actions'
+import axios from 'axios'
 
 // util functions
 import permute from '../../utils/generateMenuNames'
@@ -6,7 +7,7 @@ import permute from '../../utils/generateMenuNames'
 // action types
 const CHANGE_INPUT = 'menu/CHANGE_INPUT'
 const CREATE_MENU = 'menu/CREATE_MENU'
-const READ_MENU = 'menu/READ_MENU'
+const GET_MENU_DATA = 'menu/GET_MENU_DATA'
 const UPDATE_MENU = 'menu/UPDATE_MENU'
 const DELETE_MENU = 'menu/DELETE_MENU'
 
@@ -61,6 +62,17 @@ export const checkMenuNameList = (idx) => (dispatch, getState) => {
 }
 const onCheckMenuNameList = createAction(ON_CHECK_MENU_NAME_LIST, payload => ({ updatedMenuNameList: payload.updatedMenuNameList }))
 
+export const getMenu = (store_id, menu_id) => (dispatch) => {
+  axios.get(`http://visquit.ga/menu/${menu_id}?store_id=${store_id}`)
+    .then(({ data: { results } }) => {
+      const menuId = menu_id
+      const menuName = results[0].menu_name
+      const menuPrice = results[0].menu_price
+      dispatch(getMenuData({ menuId, menuName, menuPrice }))
+    })
+}
+const getMenuData = createAction(GET_MENU_DATA, payload => ({ menuId: payload.menuId, menuName: payload.menuName, menuPrice: payload.menuPrice }))
+
 // default state for this slice state
 const initialState = {
   menuId: '',
@@ -83,6 +95,12 @@ export default handleActions({
   }),
   [ON_CHECK_MENU_NAME_LIST]: (state, action) => ({
     ...state,
-    menuNameList: action.payload.updatedMenuNameList
+    menuNameList: action.payload.updatedMenuNameList,
+  }),
+  [GET_MENU_DATA]: (state, action) => ({
+    ...state,
+    menuId: action.payload.menuId,
+    menuName: action.payload.menuName,
+    menuPrice: action.payload.menuPrice,
   })
 }, initialState)

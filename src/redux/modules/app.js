@@ -2,9 +2,6 @@ import { createAction, handleActions } from 'redux-actions'
 import axios from 'axios'
 
 // action types
-const EXAMPLE_INCREASE = 'app/EXAMPLE_INCREASE'
-const EXAMPLE_DECREASE = 'app/EXAMPLE_DECREASE'
-
 const UPDATE_MENU_LIST = 'app/UPDATE_MENU_LIST'
 const UPDATE_ORDER_PENDING_LIST = 'app/UPDATE_ORDER_PENDING_LIST'
 const UPDATE_ORDER_HISTORY_LIST = 'app/UPDATE_ORDER_HISTORY_LIST'
