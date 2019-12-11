@@ -41,14 +41,14 @@ const MenuItem = (props) => {
               <Typography
                 variant="h5"
               >
-                {props.item.name}
+                {props.item.menu_name}
               </Typography>
             </Grid>
             <Grid item>
               <Typography
                 variant="subtitle1"
               >
-                {props.item.price}원
+                {props.item.menu_price}원
               </Typography>
             </Grid>
           </Grid>
