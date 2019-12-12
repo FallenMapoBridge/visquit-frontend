@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as menuActions from '../redux/modules/menu'
+import * as appActions from '../redux/modules/app'
 
 import PageWrapper from '../components/base/PageWrapper'
 import MenuEditWrapper from '../components/common/templates/MenuEditWrapper'
@@ -41,11 +42,23 @@ const MenuEditContainer = (props) => {
   }
 
   const handleUpdateMenu = (menuId, menuName, menuPrice) => {
-    // TODO
+    props.menuActions.updateMenu(props.storeId, menuId, menuName, menuPrice)
+      .then(() => {
+        // 수정 성공
+        // 새 메뉴 목록 가져온 뒤 화면 전환
+        props.appActions.getMenuList(props.storeId)
+        props.history.push('/menu')
+      })
   }
 
   const handleDeleteMenu = (menuId) => {
-    // TODO
+    props.menuActions.deleteMenu(props.storeId, menuId)
+      .then(() => {
+        // 삭제 성공
+        // 새 메뉴 목록 가져온 뒤 화면 전환
+        props.appActions.getMenuList(props.storeId)
+        props.history.push('/menu')
+      })
   }
 
   useEffect(() => {
@@ -82,8 +95,8 @@ const MenuEditContainer = (props) => {
             handleInputChange={handleInputChange}
             handleMenuNameCheckbox={handleMenuNameCheckbox}
             handleCreateMenu={handleCreateMenu}
-            // handleUpdateMenu
-            // handleDeleteMenu
+            handleUpdateMenu={handleUpdateMenu}
+            handleDeleteMenu={handleDeleteMenu}
           />
         </MenuEditWrapper>
       </PageWrapper>
@@ -101,7 +114,8 @@ const mapStateToProps = ({ menu, app }) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  menuActions: bindActionCreators(menuActions, dispatch)
+  menuActions: bindActionCreators(menuActions, dispatch),
+  appActions: bindActionCreators(appActions, dispatch),
 })
 
 export default connect(

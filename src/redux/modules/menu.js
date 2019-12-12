@@ -87,7 +87,6 @@ export const getMenu = (store_id, menu_id) => (dispatch) => {
 const getMenuData = createAction(GET_MENU_DATA, payload => ({ menuId: payload.menuId, menuName: payload.menuName, menuPrice: payload.menuPrice }))
 
 // ## ACTION - Create a new menu for particular store
-// 
 export const createMenu = (store_id, menu_name, menu_price) => (dispatch) => {
   return axios.post(`http://visquit.ga/menu?store_id=${store_id}`, {
     store_id: store_id,
@@ -95,7 +94,24 @@ export const createMenu = (store_id, menu_name, menu_price) => (dispatch) => {
     menu_name: menu_name,
     menu_price: menu_price,
   })
-  // TODOS: 생성 실패했을 경우의 처리 로직 추가 필요
+  // TODOS: 작업 실패했을 경우의 처리 로직 추가 필요
+}
+
+// ## ACTION - Update a menu for particular store
+export const updateMenu = (store_id, menu_id, menu_name, menu_price) => (dispatch) => {
+  return axios.put(`http://visquit.ga/menu/${menu_id}?store_id=${store_id}`, {
+    store_id: store_id,
+    menu_id: menu_id, // Will be excluded in server-side
+    menu_name: menu_name,
+    menu_price: menu_price,
+  })
+  // TODOS: 작업 실패했을 경우의 처리 로직 추가 필요
+}
+
+// ## ACTION - Delete a menu for particular store
+export const deleteMenu = (store_id, menu_id) => (dispatch) => {
+  return axios.delete(`http://visquit.ga/menu/${menu_id}?store_id=${store_id}`)
+  // TODOS: 작업 실패했을 경우의 처리 로직 추가 필요
 }
 
 // default state for this slice state

@@ -130,8 +130,8 @@ const MenuEditContent = (props) => {
         : (match.params.menuId)
           ? (
             <EditButtonSet
-              onClickUpdate={() => alert('update button!')}
-              onClickDelete={() => alert('delete button!')}
+              onClickUpdate={() => props.handleUpdateMenu(match.params.menuId, props.menuName, props.menuPrice)}
+              onClickDelete={() => props.handleDeleteMenu(match.params.menuId)}
               onClickCancel={() => history.push('/menu')}
             />
           )
