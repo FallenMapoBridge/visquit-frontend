@@ -32,15 +32,39 @@ const MenuEditContainer = (props) => {
     props.menuActions.checkMenuNameList(index)
   }
 
+  const handleCreateMenu = (menuName, menuPrice) => {
+    props.menuActions.createMenu(props.storeId, menuName, menuPrice)
+      .then(() => {
+        // 생성 성공
+        props.history.push('/menu')
+      })
+  }
+
+  const handleUpdateMenu = (menuId, menuName, menuPrice) => {
+    // TODO
+  }
+
+  const handleDeleteMenu = (menuId) => {
+    // TODO
+  }
+
   useEffect(() => {
-    props.menuActions.getMenu(props.storeId, props.match.params.menuId)
+    if (props.match.params.menuId !== undefined) {
+      props.menuActions.getMenu(props.storeId, props.match.params.menuId)
+    }
 
     return () => {
-      const keys = ['menuId', 'menuName', 'menuPrice']
-      keys.map((key) => {
+      const keysWithInit = [
+        { key: 'menuId', initValue: '' },
+        { key: 'menuName', initValue: '' },
+        { key: 'menuPrice', initValue: '' },
+        { key: 'menuNameList', initValue: [] },
+        { key: 'menuNameListChosen', initValue: [] }
+      ]
+      keysWithInit.map((item) => {
         props.menuActions.changeInput({
-          key: key,
-          value: '',
+          key: item.key,
+          value: item.initValue,
         })
       })
     }
@@ -51,12 +75,15 @@ const MenuEditContainer = (props) => {
       <PageWrapper>
         <MenuEditWrapper>
           <MenuEditContent
-            menuId={props.menuId} // 테스트용 props
+            menuId={props.menuId}
             menuName={props.menuName}
             menuPrice={props.menuPrice}
             menuNameList={props.menuNameList}
             handleInputChange={handleInputChange}
             handleMenuNameCheckbox={handleMenuNameCheckbox}
+            handleCreateMenu={handleCreateMenu}
+            // handleUpdateMenu
+            // handleDeleteMenu
           />
         </MenuEditWrapper>
       </PageWrapper>

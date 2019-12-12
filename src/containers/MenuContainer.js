@@ -25,7 +25,7 @@ const MenuContainer = (props) => {
           (item) => (
             <MenuItem
               item={item}
-              key={item.menu_name}
+              key={item.menu_id}
               handleClick={() => props.history.push(`/menu/edit/${item.menu_id}`)}
             />
           )

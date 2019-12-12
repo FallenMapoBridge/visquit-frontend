@@ -122,7 +122,7 @@ const MenuEditContent = (props) => {
         (location.pathname === '/menu/edit/new')
         ? (
             <AddButtonSet
-              onClickCreate={() => alert('create button!')}
+              onClickCreate={() => props.handleCreateMenu(props.menuName, props.menuPrice)}
               onClickCancel={() => history.push('/menu')}
             />
           )
