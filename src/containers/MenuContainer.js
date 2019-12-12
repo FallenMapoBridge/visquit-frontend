@@ -1,32 +1,32 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
+
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import * as appActions from '../redux/modules/app'
 
 import PageWrapper from '../components/base/PageWrapper'
 import PageListWrapper from '../components/common/templates/PageListWrapper'
 import PageTitle from '../components/common/typography/PageTitle'
 import MenuItem from '../components/common/item/MenuItem'
 
-import menu from '../utils/temp/menu'
-
-// # TODOS
-// - API 사용하여 메뉴 전체 가져오기
-// - 각 메뉴 아이템에 대하여 메뉴 ID 전달하기
-//   - 메뉴 Update / Delete에 활용
-
 const MenuContainer = (props) => {
+  // 현재 가게에서 사용하는 메뉴 목록 가져오기
+  useEffect(() => {
+    props.appActions.getMenuList(props.storeId)
+  }, [])
+
   return (
     <>
       <PageWrapper>
         <PageTitle>메뉴 목록</PageTitle>
-        <PageListWrapper items={menu}>
+        <PageListWrapper items={props.menuList}>
         {
           (item) => (
             <MenuItem
               item={item}
-              key={item.name}
-              handleClick={() => props.history.push(`/menu/edit/${item.id}`)}
+              key={item.menu_id}
+              handleClick={() => props.history.push(`/menu/edit/${item.menu_id}`)}
             />
           )
         }
@@ -36,4 +36,16 @@ const MenuContainer = (props) => {
   )
 }
 
-export default withRouter(MenuContainer)
+const mapStateToProps = ({ app }) => ({
+  menuList: app.menuList,
+  storeId: app.storeId,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  appActions: bindActionCreators(appActions, dispatch)
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(MenuContainer))

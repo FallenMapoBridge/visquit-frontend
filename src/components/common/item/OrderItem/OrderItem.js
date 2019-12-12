@@ -62,30 +62,32 @@ const OrderItem = (props) => {
           >
             <Grid item>
               <Typography
+                variant="h5"
+              >
+                주문 번호 {props.item.order_id}.
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography
                 variant="subtitle1"
               >
                 {props.item.order_date} {props.item.order_time}
               </Typography>
             </Grid>
-            {props.item.order_items.map((order_item, index) => (
-              <Grid
-                key={index}
-                item
-              >
-                <Typography
-                  variant="subtitle1"
-                >
-                  {order_item.menu_name} {order_item.item_quantity}
-                </Typography>
-              </Grid>
-            ))}
             <Grid item>
-                <Typography
-                  variant="h5"
-                >
-                  {props.item.order_price}원
-                </Typography>
-              </Grid>
+              <Typography
+                variant="subtitle1"
+              >
+                {props.menuName} {props.item.order_quantity}개
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography
+                variant="h5"
+              >
+                {props.item.order_price}원
+              </Typography>
+            </Grid>
           </Grid>
         </CardContent>
       </Card>

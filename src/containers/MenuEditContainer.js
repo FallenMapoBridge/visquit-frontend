@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { withRouter } from 'react-router-dom'
+
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
-import * as actions from '../redux/modules/menu'
+import * as menuActions from '../redux/modules/menu'
+import * as appActions from '../redux/modules/app'
 
 import PageWrapper from '../components/base/PageWrapper'
 import MenuEditWrapper from '../components/common/templates/MenuEditWrapper'
@@ -19,29 +21,82 @@ import MenuEditContent from '../components/common/content/MenuEditContent'
 const MenuEditContainer = (props) => {
   const handleInputChange = name => event => {
     // 각 입력 폼에 대한 입력값을 Redux Store에 반영
-    props.actions.changeInput({
+    props.menuActions.changeInput({
       key: name,
       value: event.target.value
     })
     if (name === 'menuName')
-    props.actions.generateMenuList(event.target.value)
+    props.menuActions.generateMenuList(event.target.value)
   }
 
   const handleMenuNameCheckbox = index => event => {
-    props.actions.checkMenuNameList(index)
+    props.menuActions.checkMenuNameList(index)
   }
+
+  const handleCreateMenu = (menuName, menuPrice) => {
+    props.menuActions.createMenu(props.storeId, menuName, menuPrice)
+      .then(() => {
+        // 생성 성공
+        props.history.push('/menu')
+      })
+  }
+
+  const handleUpdateMenu = (menuId, menuName, menuPrice) => {
+    props.menuActions.updateMenu(props.storeId, menuId, menuName, menuPrice)
+      .then(() => {
+        // 수정 성공
+        // 새 메뉴 목록 가져온 뒤 화면 전환
+        props.appActions.getMenuList(props.storeId)
+        props.history.push('/menu')
+      })
+  }
+
+  const handleDeleteMenu = (menuId) => {
+    props.menuActions.deleteMenu(props.storeId, menuId)
+      .then(() => {
+        // 삭제 성공
+        // 새 메뉴 목록 가져온 뒤 화면 전환
+        props.appActions.getMenuList(props.storeId)
+        props.history.push('/menu')
+      })
+  }
+
+  useEffect(() => {
+    if (props.match.params.menuId !== undefined) {
+      props.menuActions.getMenu(props.storeId, props.match.params.menuId)
+    }
+
+    return () => {
+      const keysWithInit = [
+        { key: 'menuId', initValue: '' },
+        { key: 'menuName', initValue: '' },
+        { key: 'menuPrice', initValue: '' },
+        { key: 'menuNameList', initValue: [] },
+        { key: 'menuNameListChosen', initValue: [] }
+      ]
+      keysWithInit.map((item) => {
+        props.menuActions.changeInput({
+          key: item.key,
+          value: item.initValue,
+        })
+      })
+    }
+  }, [])
 
   return (
     <>
       <PageWrapper>
         <MenuEditWrapper>
           <MenuEditContent
-            menuId={11} // 테스트용 props
+            menuId={props.menuId}
             menuName={props.menuName}
             menuPrice={props.menuPrice}
             menuNameList={props.menuNameList}
             handleInputChange={handleInputChange}
             handleMenuNameCheckbox={handleMenuNameCheckbox}
+            handleCreateMenu={handleCreateMenu}
+            handleUpdateMenu={handleUpdateMenu}
+            handleDeleteMenu={handleDeleteMenu}
           />
         </MenuEditWrapper>
       </PageWrapper>
@@ -49,19 +104,21 @@ const MenuEditContainer = (props) => {
   )
 }
 
-const mapStateToProps = ({ menu }) => ({
+const mapStateToProps = ({ menu, app }) => ({
   menuId: menu.menuId,
   menuName: menu.menuName,
   menuPrice: menu.menuPrice,
   menuNameList: menu.menuNameList,
   menuNameListChosen: menu.menuNameListChosen,
+  storeId: app.storeId,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(actions, dispatch)
+  menuActions: bindActionCreators(menuActions, dispatch),
+  appActions: bindActionCreators(appActions, dispatch),
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MenuEditContainer)
+)(withRouter(MenuEditContainer))

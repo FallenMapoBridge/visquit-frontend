@@ -122,7 +122,7 @@ const MenuEditContent = (props) => {
         (location.pathname === '/menu/edit/new')
         ? (
             <AddButtonSet
-              onClickCreate={() => alert('create button!')}
+              onClickCreate={() => props.handleCreateMenu(props.menuName, props.menuPrice)}
               onClickCancel={() => history.push('/menu')}
             />
           )
@@ -130,8 +130,8 @@ const MenuEditContent = (props) => {
         : (match.params.menuId)
           ? (
             <EditButtonSet
-              onClickUpdate={() => alert('update button!')}
-              onClickDelete={() => alert('delete button!')}
+              onClickUpdate={() => props.handleUpdateMenu(match.params.menuId, props.menuName, props.menuPrice)}
+              onClickDelete={() => props.handleDeleteMenu(match.params.menuId)}
               onClickCancel={() => history.push('/menu')}
             />
           )
